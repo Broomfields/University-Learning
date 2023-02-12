@@ -1,0 +1,3 @@
+C:\Users\perso\Documents\Programming\University\Tax Rate Calculator\x64\Debug\Tax Rate Calculator.vcxproj.AssemblyReference.cache
+C:\Users\perso\Documents\Programming\University\Tax Rate Calculator\x64\Debug\Tax Rate Calculator.vcxproj.SuggestedBindingRedirects.cache
+C:\Users\perso\Documents\Programming\University\Tax Rate Calculator\x64\Debug\Tax Rate Calculator.exe

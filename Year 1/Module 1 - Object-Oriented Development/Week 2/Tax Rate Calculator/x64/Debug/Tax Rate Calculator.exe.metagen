@@ -1,0 +1,29 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly Tax Rate Calculator, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class TaxRateCalculator.ConsoleManager: AutoLayout, AnsiClass, Class, Public
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    NewDiagnositicsID(): PrivateScope, Public, Static, HideBySig
+    DiagMessage(String, Boolean(HasFieldMarshal)): PrivateScope, Public, Static, HideBySig
+    DiagMessage(String): PrivateScope, Public, Static, HideBySig
+    InfoMessage(String, Boolean(HasFieldMarshal)): PrivateScope, Public, Static, HideBySig
+    InfoMessage(String): PrivateScope, Public, Static, HideBySig
+    ErrorMessage(String): PrivateScope, Public, Static, HideBySig
+    FatalMessage(String): PrivateScope, Public, Static, HideBySig
+    ConsoleMessage(String): PrivateScope, Public, Static, HideBySig
+    DebugMessage(String): PrivateScope, Public, Static, HideBySig
+    DebugMessage2(String): PrivateScope, Public, Static, HideBySig
+    DebugMessage3(String): PrivateScope, Public, Static, HideBySig
+    MemoryDebugMessage(String, UInt32, UInt32): PrivateScope, Public, Static, HideBySig
+    KB(UInt32): PrivateScope, Public, Static, HideBySig
+    MB(UInt32): PrivateScope, Public, Static, HideBySig
+    InitialiseDebugConsole(): PrivateScope, Public, Static, HideBySig
+    TerminateDebugConsole(): PrivateScope, Public, Static, HideBySig
+    Exit(): PrivateScope, Public, Static, HideBySig

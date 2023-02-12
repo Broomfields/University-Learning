@@ -1,0 +1,5 @@
+﻿  ScanningArray.c
+C:\Users\perso\Documents\Programming\University\Algorithms and Data Structures\Week 1\C\ScanningArray\ScanningArray.c(40,8): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\perso\Documents\Programming\University\Algorithms and Data Structures\Week 1\C\ScanningArray\ScanningArray.c(89,19): warning C4013: 'strlen' undefined; assuming extern returning int
+C:\Users\perso\Documents\Programming\University\Algorithms and Data Structures\Week 1\C\ScanningArray\ScanningArray.c(92,2): warning C4013: 'memset' undefined; assuming extern returning int
+  ScanningArray.vcxproj -> C:\Users\perso\Documents\Programming\University\Algorithms and Data Structures\Week 1\C\ScanningArray\x64\Debug\ScanningArray.exe

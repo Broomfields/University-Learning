@@ -1,0 +1,3 @@
+﻿  SortingTest.c
+C:\Users\perso\Documents\Programming\University\Algorithms and Data Structures\Week 3\C\SortingTest\SortingTest.c(14,8): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
+  SortingTest.vcxproj -> C:\Users\perso\Documents\Programming\University\Algorithms and Data Structures\Week 3\C\SortingTest\x64\Debug\SortingTest.exe
