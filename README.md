@@ -6,7 +6,7 @@ This repository contains lecture and seminar materials for all modules across al
 
 The directory structure is organised by year and module, with each module having an introduction and weekly reference and work folders. 
 
-### Year 1:
+### Year 1
   - Module 1 - Object-Oriented Development
   - Module 2 - Systems Design and Database
   - Module 3 - Algorithms and Data Structures
