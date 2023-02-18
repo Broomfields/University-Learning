@@ -3,96 +3,82 @@
 #include <time.h>
 #include <stdbool.h>
 
-#define arraySize 23
+#define DATASET_SIZE 23
+#define EXAMPLE_DATASET_SIZE 8
+
 #define maxValue 50
 #define MAX 32767
 
-int dataArray[arraySize];
+#define DO_TEST 0
 
-void generateData(int maxDataValue)
+#pragma region Week 3
+
+int* generateDataSet(int maxDataValue)
 {
+	int* data = (int*)malloc(DATASET_SIZE * sizeof(int));
 	srand(time(NULL));
 
 	int index;
-	for (index = 0; index < arraySize; index++)
+	for (index = 0; index < DATASET_SIZE; index++)
 	{
-		dataArray[index] = rand() % maxDataValue;
+		data[index] = rand() % maxDataValue;
 	}
+
+	return data;
 }
 
-int generateExampleDataSet()
+int* generateExampleDataSet()
 {
-	int exampleSize = 8;
-	int exampleSet[8] = { 44, 23, 42, 33, 16, 54, 34, 18 };
+	int* exampleSet = (int*)malloc(EXAMPLE_DATASET_SIZE * sizeof(int));
+	exampleSet[0] = 44;
+	exampleSet[1] = 23;
+	exampleSet[2] = 42;
+	exampleSet[3] = 33;
+	exampleSet[4] = 16;
+	exampleSet[5] = 54;
+	exampleSet[6] = 34;
+	exampleSet[7] = 18;
 	
-	int index;
-	for (index = 0; index < arraySize; index++)
-	{
-		if (index < exampleSize)
-		{
-			dataArray[index] = exampleSet[index];
-		}
-		else
-		{
-			dataArray[index] = 0;
-		}
-	}
-
-	return exampleSize;
+	return exampleSet;
 }
 
-void printArrayContents(char* labelText)
+void swap(int* data, int index1, int index2)
 {
-	printf("%s Array contents : { ", labelText);
-
-	int index;
-	for (index = 0; index < arraySize; index++)
-	{
-		printf("%d ", dataArray[index]);
-	}
-
-	printf("}\n");
-}
-
-void swap(int* dataArray, int index1, int index2)
-{
-	int temp = dataArray[index1];
+	int temp = data[index1];
 	
-	dataArray[index1] = dataArray[index2];
-	dataArray[index2] = temp;
+	data[index1] = data[index2];
+	data[index2] = temp;
 }
 
-void bubbleSort()
+void bubbleSort(int* data, int dataSize)
 {
-	int dataSize = generateExampleDataSet();
-
-	int outerIndex, innerIndex;
+	int outerIndex, innerIndex, comparator;
 	for (outerIndex = 0; outerIndex < dataSize - 1; outerIndex++)
 	{
-		for (innerIndex = 0; innerIndex < (dataSize - (outerIndex - 1)); innerIndex++)
+		comparator = (dataSize - 1);
+		for (innerIndex = 0; innerIndex < comparator; innerIndex++)
 		{
-			if (dataArray[innerIndex + 1] < dataArray[innerIndex])
+			if (data[innerIndex + 1] < data[innerIndex])
 			{
-				swap(dataArray, innerIndex + 1, innerIndex);
+				swap(data, innerIndex + 1, innerIndex);
 			}
 		}
 	}
 }
 
-void bubbleSort_opt1()
+void optimisedBubbleSort1(int* data, int dataSize)
 {
-	int dataSize = generateExampleDataSet();
-
 	bool didSwap;
-	int outerIndex, innerIndex;
+	int outerIndex, innerIndex, comparator;
 	for (outerIndex = 0; outerIndex < dataSize - 1; outerIndex++)
 	{
 		didSwap = false;
-		for (innerIndex = 0; innerIndex < (dataSize - (outerIndex - 1)); innerIndex++)
+		comparator = (dataSize - 1 - outerIndex);
+		for (innerIndex = 0; innerIndex < comparator; innerIndex++)
 		{
-			if (dataArray[innerIndex + 1] < dataArray[innerIndex])
+			if (data[innerIndex + 1] < data[innerIndex])
 			{
-				swap(dataArray, innerIndex + 1, innerIndex);
+				swap(data, innerIndex + 1, innerIndex);
 				didSwap = true;
 			}
 		}
@@ -104,20 +90,19 @@ void bubbleSort_opt1()
 	}
 }
 
-void bubbleSort_opt2()
+void optimisedBubbleSort2(int* data, int dataSize)
 {
-	int dataSize = generateExampleDataSet();
-
 	bool didSwap;
-	int outerIndex, innerIndex;
-	for (outerIndex = 0; outerIndex < dataSize - 2 - outerIndex; outerIndex++)
+	int outerIndex, innerIndex, comparator;
+	for (outerIndex = 0; outerIndex < dataSize - 1; outerIndex++)
 	{
 		didSwap = false;
-		for (innerIndex = 0; innerIndex < (dataSize - (outerIndex - 1)); innerIndex++)
+		comparator = dataSize - (outerIndex + 1);
+		for (innerIndex = 0; innerIndex < comparator; innerIndex++)
 		{
-			if (dataArray[innerIndex + 1] < dataArray[innerIndex])
+			if (data[innerIndex + 1] < data[innerIndex])
 			{
-				swap(dataArray, innerIndex + 1, innerIndex);
+				swap(data, innerIndex + 1, innerIndex);
 				didSwap = true;
 			}
 		}
@@ -129,21 +114,194 @@ void bubbleSort_opt2()
 	}
 }
 
-void shakerSort()
+void shakerSort(int* data, int dataSize)
 {
-	// YOUR CODE GOES HERE
+	int leftIndex = 0;
+	int rightIndex = dataSize - 1;
+	bool swapped = true;
+
+	while (swapped)
+	{
+		swapped = false;
+
+		// Pass through array from left to right
+		int lastSwapIndex = rightIndex, currentIndex = leftIndex;
+		for (; currentIndex < rightIndex; currentIndex++)
+		{
+			if (data[currentIndex] > data[currentIndex + 1])
+			{
+				int temp = data[currentIndex];
+				data[currentIndex] = data[currentIndex + 1];
+				data[currentIndex + 1] = temp;
+				swapped = true;
+				lastSwapIndex = currentIndex;
+			}
+		}
+		rightIndex = lastSwapIndex;
+
+		if (!swapped)
+		{
+			// If no swaps were made, the array is already sorted
+			return;
+		}
+
+		swapped = false;
+
+		// Pass through array from right to left
+		lastSwapIndex = leftIndex;
+		currentIndex = rightIndex;
+		for (; currentIndex > leftIndex; currentIndex--)
+		{
+			if (data[currentIndex] < data[currentIndex - 1])
+			{
+				int temp = data[currentIndex];
+				data[currentIndex] = data[currentIndex - 1];
+				data[currentIndex - 1] = temp;
+				swapped = true;
+				lastSwapIndex = currentIndex;
+			}
+		}
+		leftIndex = lastSwapIndex;
+	}
 }
 
-void selectionSort()
+
+#pragma endregion
+
+#pragma region Week 4
+
+// Implement the SelectionSort algorithm. Check that the results are as expected (i.e. the
+// integer values are sorted in ascending or descending numerical order).
+void selectionSort(int* data, int dataSize)
 {
-	// YOUR CODE GOES HERE
+	int outerIndex, innerIndex, minimumIndex;
+
+	// One by one move boundary of unsorted subarray
+	for (outerIndex = 0; outerIndex < dataSize - 1; outerIndex++)
+	{
+		// Find the minimum element in unsorted array
+		minimumIndex = outerIndex;
+		for (innerIndex = outerIndex + 1; innerIndex < dataSize; innerIndex++)
+		{
+			if (data[innerIndex] < data[minimumIndex])
+			{
+				minimumIndex = innerIndex;
+			}
+		}
+
+		// Swap the found minimum element with the first element
+		int temp = data[minimumIndex];
+		data[minimumIndex] = data[outerIndex];
+		data[outerIndex] = temp;
+	}
 }
 
-void insertionSort()
+// Implement the InsertionSort algorithm. Check that the results are as expected (i.e. the
+// integer values are sorted in ascending or descending numerical order).
+void insertionSort(int* data, int dataSize)
 {
-	// YOUR CODE GOES HERE
+	int outerIndex, innerIndex, key;
+
+	for (outerIndex = 1; outerIndex < dataSize; outerIndex++)
+	{
+		key = data[outerIndex];
+		innerIndex = outerIndex - 1;
+
+		// Move elements of data[0..outerIndex-1], that are greater than key, to one position ahead of their current position
+		while (innerIndex >= 0 && data[innerIndex] > key)
+		{
+			data[innerIndex + 1] = data[innerIndex];
+			innerIndex--;
+		}
+
+		data[innerIndex + 1] = key;
+	}
 }
 
+#pragma endregion
+
+
+#pragma region Output To User
+
+void printSeperator(char seperatorCharacter, int seperatorLength)
+{
+	char* seperator = malloc(seperatorLength + 1);
+	memset(seperator, seperatorCharacter, seperatorLength);
+	seperator[seperatorLength] = 0;
+
+	printf("\n%s\n", seperator);
+
+	free(seperator);
+}
+
+void printHeader(char* headerText)
+{
+	int length = strlen(headerText) + 4;
+
+	printf("\n");
+	printSeperator('-', length);
+	printf(" # %s", headerText);
+	printSeperator('-', length);
+	printf("\n\n");
+}
+
+void printArrayContents(char* labelText, int* data, int dataSize)
+{
+	printf("%s Array contents :\n -> { ", labelText);
+
+	char* delimiter = ", ";
+
+	int index;
+	for (index = 0; index < dataSize; index++)
+	{
+		if (index == (dataSize - 1))
+		{
+			delimiter = "";
+		}
+
+		printf("%d%s", data[index], delimiter);
+	}
+
+	printf(" }\n");
+}
+
+void doSort(void (*sortFunction)(int*, int), char* sortName)
+{
+	printHeader(sortName);
+
+	// Example Data Set
+
+	printf("'Example' DataSet\n");
+	int* exampleDataSet = generateExampleDataSet();
+	printArrayContents("\nUnsorted", exampleDataSet, EXAMPLE_DATASET_SIZE);
+
+	printf("\n<Sorting 'Example' DataSet>\n\n");
+	sortFunction(exampleDataSet, EXAMPLE_DATASET_SIZE);
+	printArrayContents("Sorted", exampleDataSet, EXAMPLE_DATASET_SIZE);
+
+	free(exampleDataSet);
+
+	printf("\n\n");
+
+	// Generated Data Set
+
+	printf("'Generated' DataSet\n");
+	int* dataSet = generateDataSet(maxValue);
+	printArrayContents("\nUnsorted", dataSet, DATASET_SIZE);
+
+	printf("\n<Sorting 'Generated' DataSet>\n\n");
+	sortFunction(dataSet, DATASET_SIZE);
+	printArrayContents("Sorted", dataSet, DATASET_SIZE);
+
+	free(dataSet);
+
+	printf("\n\n");
+}
+
+#pragma endregion
+
+
+#pragma region Testing
 
 void test()
 {
@@ -155,59 +313,31 @@ void test()
 	}
 }
 
+#pragma endregion
+
+
 int main()
 {
-	//// Bubble sort
-	//generateData(maxValue);
-	//printArrayContents("\nUnsorted");
+	if (DO_TEST)
+	{
+		test();
+	}
+	else
+	{
+		doSort(bubbleSort, "Bubble");
 
-	//printf("Sorting...\n");
-	//bubbleSort();
-	//printArrayContents("Bubble");
+		doSort(optimisedBubbleSort1, "Bubble (Optimisation 1)");
 
-	//
-	//// Bubble sort optimised 1
-	//generateData(maxValue);
-	//bubbleSort();
-	//printArrayContents("\nUnsorted");
+		doSort(optimisedBubbleSort2, "Bubble (Optimisation 2)");
 
-	//printf("Sorting...\n");
-	//bubbleSort_opt1();
-	//printArrayContents("Bubble opt 1");
+		doSort(shakerSort, "Shaker");
 
-	//// Bubble sort optimised 2
-	//generateData(maxValue);
-	//printArrayContents("\nUnsorted");
+		doSort(selectionSort, "Selection");
 
-	//printf("Sorting...\n");
-	//bubbleSort_opt2();
-	//printArrayContents("Bubble opt 2");
+		doSort(insertionSort, "Insertion");
+	}
 
-	//// Cocktail Shaker sort
-	//generateData(maxValue);
-	//printArrayContents("\nUnsorted");
-
-	//printf("Sorting...\n");
-	//shakerSort();
-	//printArrayContents("Shaker");
-
-	//// Selection sort
-	//generateData(maxValue);
-	//printArrayContents("\nUnsorted");
-
-	//printf("Sorting...\n");
-	//selectionSort();
-	//printArrayContents("Selection");
-
-	//// Insertion sort
-	//generateData(maxValue);
-	//printArrayContents("\nUnsorted");
-
-	//printf("Sorting...\n");
-	//insertionSort();
-	//printArrayContents("Insertion");
-	
-	test();
+	Sleep(10);
 
 	return 0;
 }

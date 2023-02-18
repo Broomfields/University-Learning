@@ -1,3 +1,6 @@
 ﻿  SortingTest.c
-C:\Users\perso\Documents\Programming\University\Algorithms and Data Structures\Week 3\C\SortingTest\SortingTest.c(14,8): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
-  SortingTest.vcxproj -> C:\Users\perso\Documents\Programming\University\Algorithms and Data Structures\Week 3\C\SortingTest\x64\Debug\SortingTest.exe
+C:\Users\perso\OneDrive\Documents\Personal Documents\University\Learning\Year 1\Module 3 - Algorithms and Data Structures\Week 3\Work\C\SortingTest\SortingTest.c(19,8): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\perso\OneDrive\Documents\Personal Documents\University\Learning\Year 1\Module 3 - Algorithms and Data Structures\Week 3\Work\C\SortingTest\SortingTest.c(229,2): warning C4013: 'memset' undefined; assuming extern returning int
+C:\Users\perso\OneDrive\Documents\Personal Documents\University\Learning\Year 1\Module 3 - Algorithms and Data Structures\Week 3\Work\C\SortingTest\SortingTest.c(239,15): warning C4013: 'strlen' undefined; assuming extern returning int
+C:\Users\perso\OneDrive\Documents\Personal Documents\University\Learning\Year 1\Module 3 - Algorithms and Data Structures\Week 3\Work\C\SortingTest\SortingTest.c(340,2): warning C4013: 'Sleep' undefined; assuming extern returning int
+  SortingTest.vcxproj -> C:\Users\perso\OneDrive\Documents\Personal Documents\University\Learning\Year 1\Module 3 - Algorithms and Data Structures\Week 3\Work\C\SortingTest\x64\Debug\SortingTest.exe
