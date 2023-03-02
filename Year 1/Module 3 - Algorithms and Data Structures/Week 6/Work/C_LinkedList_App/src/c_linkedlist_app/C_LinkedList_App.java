@@ -84,7 +84,7 @@ public class C_LinkedList_App
        s = clL3.toString();
        System.out.println("list content = " + s);
        
-       System.out.println("5" + clL3.ordinality(n) + " item in list is now " + clL3.getAtPos(5));
+       System.out.println("5" + clL3.ordinality(5) + " item in list is now " + clL3.getAtPos(5));
     }
 	
 } // end class C_LinkedList_App
